@@ -23,18 +23,28 @@ public class PlayerMovement : MonoBehaviour
         if (move != 0)
         {
             animator.Play("Walk");
-            transform.localScale = new Vector3(move > 0 ? 1 : -1, 1, 1); // Поворот
+            if(move > 0)
+            {
+                 transform.localScale = new Vector3(-1, 1, 1);
+            }
+            else
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+            }
+           
         }
-        else
-        {
-            animator.Play("Walk");
-        }
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            Debug.Log("jump");
             animator.Play("Jump");
         }
+       else
+        {
+            animator.Play("Idle");
+        }
+
+        
 
     }
 }
